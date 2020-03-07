@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!-- mapper对应的命名空间 -->
+<mapper namespace="com.woniu.pojo.DriverMapper">
+	<!-- 输入类型 输出类型 -->
+	<insert id="save" parameterType="driver">
+		insert into driver values(#{driverid},#{drivername},#{dcode},#{dcodefalse},#{status})
+	</insert>
+	<update id="update" parameterType="driver">
+		update driver set
+		drivername=#{drivername},dcode=#{dcode},dcodefalse=#{dcodefalse},status=#{status}
+		where driverid=#{driverid}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from driver where carid=#{carid}
+	</delete>
+	<select id="findOne" parameterType="int" resultType="driver">
+		select * from driver where carid=#{carid}
+	</select>
+	<select id="findAll" resultType="driver">
+		select * from driver
+	</select>
+</mapper>

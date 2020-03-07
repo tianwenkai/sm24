@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!-- mapper对应的命名空间 -->
+<mapper namespace="com.woniu.pojo.EmpMapper">
+	<!-- 输入类型 输出类型 -->
+	<insert id="save" parameterType="emp">
+		insert into emp values(#{eid},#{ename},#{job},#{manager},#{dept})
+	</insert>
+	<update id="update" parameterType="emp">
+		update emp set
+		ename=#{ename},job=#{job},manager=#{manager},dept=#{dept}
+		where eid=#{eid}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from emp where eid=#{eid}
+	</delete>
+	<select id="findOne" parameterType="int" resultType="emp">
+		select * from emp where eid=#{eid}
+	</select>
+	<select id="findAll" resultType="emp">
+		select * from emp
+	</select>
+</mapper>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!-- mapper对应的命名空间 -->
+<mapper namespace="com.woniu.pojo.ManagerMapper">
+	<!-- 输入类型 输出类型 -->
+	<insert id="save" parameterType="manager">
+		insert into manager values(#{managerid},#{username},#{password},#{role})
+	</insert>
+	<update id="update" parameterType="manager">
+		update manager set
+		role=#{role},password=#{password},username=#{username}
+		where managerid=#{managerid}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from manager where managerid=#{managerid}
+	</delete>
+	<select id="findOne" parameterType="int" resultMap="managerMap">
+		select * from manager m,emp e where e.managerid = m.managerid and m.managerid=#{managerid}
+	</select>
+	<select id="findAll" resultMap="managerMap">
+		select * from manager m,emp e where e.managerid = m.managerid 
+	</select>
+	
+	<resultMap type="manager" id="managerMap">
+	<id property="managerid" column="managerid"/>
+	<result property="username" column="username"/>
+	<result property="password" column="password"/>
+	<result property="role" column="role"/>
+	
+	 <collection property="emps" ofType="emp"> 
+      <id column="eid" property="eid"/> 
+     <!--<result column="manager" property="manager"/> 
+      <result column="dept" property="dept"/>   --> 
+      <result column="ename" property="ename"/> 
+      <result column="job" property="job"/> 
+    </collection> 
+	</resultMap>
+</mapper>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!-- mapper对应的命名空间 -->
+<mapper namespace="com.woniu.pojo.DeptMapper">
+	<!-- 输入类型 输出类型 -->
+	<insert id="save" parameterType="dept">
+		insert into dept values(#{deptid},#{deptname},#{deptphone},#{deptstatus})
+	</insert>
+	<update id="update" parameterType="dept">
+		update dept set
+		deptname=#{deptname},deptphone=#{deptphone},deptstatus=#{deptstatus}
+		where deptid=#{deptid}
+	</update>
+	<delete id="delete" parameterType="int" >
+		delete from dept where deptid=#{deptid}
+	</delete>
+	<select id="findOne" parameterType="int" resultMap="deptMap">
+		 select * from dept d,emp e where d.deptid=e.deptid and d.deptid=#{deptid}
+		<!-- select * from dept deptid=#{deptid}-->
+	</select>
+	
+	<select id="findAll" resultMap="deptMap">
+		select * from dept d,emp e where d.deptid=e.deptid 
+	</select>
+	<resultMap type="dept" id="deptMap">
+	<id property="deptid" column="deptid"/>
+	<result property="deptname" column="deptname"/>
+	<result property="deptphone" column="deptphone"/>
+	<result property="deptstatus" column="deptstatus"/>
+	
+	 <collection property="emps" ofType="emp"> 
+      <id column="eid" property="eid"/> 
+      <result column="ename" property="ename"/> 
+      <result column="job" property="job"/> 
+    </collection> 
+	</resultMap>
+</mapper>
