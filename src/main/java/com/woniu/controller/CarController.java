@@ -21,6 +21,7 @@ public class CarController {
 		List<Car> carList=cs.findAll();
 		for (Car car : carList) {
 			System.out.println(car);
+			System.out.println(123);
 		}
 	}
 
